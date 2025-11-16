@@ -25,7 +25,7 @@ The class `Kokosznicka` contains three methods:
 ### hyphenate()
 This method hyphenates a given string. It inserts a hyphen character ("-") in between syllables.
 
-```
+```python
 str = "Genezyp Kapen nie znosił niewoli w żadnej formie — od najwcześniejszego dzieciństwa okazywał wstręt do niej nieprzezwyciężony."
 
 print(Kokosznicka.hyphenate(str))
@@ -35,7 +35,7 @@ print(Kokosznicka.hyphenate(str))
 ### syllablecount()
 This method returns an int object for the number of syllables in a given string.
 
-```
+```python
 str = "Niektórzy ludzie mają pociąg do zbierania osobliwości kosztowniejszych lub mniej kosztownych, na jakie kogo stać"
 
 print(Kokosznicka.syllablecount(str))
@@ -45,7 +45,7 @@ print(Kokosznicka.syllablecount(str))
 ### normalize()
 This method normalizes polish text into a sem-phonetic stript, effectively eliminating digraphs and disambiguiating the phonetic interpretation.
 
-```
+```python
 str = "Mroczne fortece pradawnych Tatr, na których wygrzewa się Król Wężów… wielkie jego cielsko siedem i pół razy owija górę olbrzymkę"
 
 print(Kokosznicka.normalize(str))
