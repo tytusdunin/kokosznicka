@@ -59,14 +59,16 @@ print(Kokosznicka.normalize(str))
 
 ✅ Hyphenation with a correct # of syllables
 
-⚠ Handling punctuation inside words (biało-czerwony, przyszłaś/eś etc.)
-- The program doesn't duplicate hyphens anymore
+✅ Handling hyphenation inside words (biało-czerwony, niby-książka etc.)
+
+⚠  Creating a PIP package
+- Fixes necessary for it to import properly
 
 ❌ Handling exceptions in semivowel formation (nauka, poliester etc.)
 
-❌ Handling affixes in any context (pod-, nad- etc.)
+❌ Handling exceptions in digraph normalization (marznąć, Tarzan etc.)
 
-❌ Creating a PIP package
+❌ Handling affixes in any context (pod-, nad- etc.)
 
 ❌ Creating an acronym decoding engine (PWN, PKiN, SJPDor etc.)
 
