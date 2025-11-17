@@ -1,0 +1,9 @@
+LICENSE
+setup.cfg
+setup.py
+kokosznicka/_init_.py
+kokosznicka/kokosznicka.py
+kokosznicka.egg-info/PKG-INFO
+kokosznicka.egg-info/SOURCES.txt
+kokosznicka.egg-info/dependency_links.txt
+kokosznicka.egg-info/top_level.txt
