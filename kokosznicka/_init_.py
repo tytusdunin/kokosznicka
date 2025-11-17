@@ -35,7 +35,7 @@ podmianki = {
 }
 
 samogł = "aeiouyóęąAEIOUYÓĘĄ"
-sonorne_i_boczne = "nmlrłńj"
+sonorne_i_boczne = "nmlrłńjň"
 
 # Na ten moment nieużywane
 półsamogłoskowe_wyjątki = {'ieu', 'eus', 'eum', 'pozau', 'prau', 'nauk', ' nau', 'eus '}
@@ -107,28 +107,48 @@ class Kokosznicka:
 
                     if char not in samogł:
                         if overcounter == True:
-                            newword = newword + char + "-"
-                            hyphencounter -= 1
-                            overcounter = False
-                        else:
-                            newword = newword + char
-                    elif char in samogł and hyphencounter != 0:
-                        if char2 in sonorne_i_boczne and char3 in samogł:
-                            newword = newword + char + "-"
-                            hyphencounter -= 1
-                            overcounter = False
-                        elif char2 == char3 or char2 in sonorne_i_boczne or char3 in sonorne_i_boczne:
-                            if char2 in samogł:
+                            if char2 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
                             else:
                                 newword = newword + char
+                                hyphencounter -= 1
+                                overcounter = False
+                        else:
+                            newword = newword + char
+                    elif char in samogł and hyphencounter != 0:
+                        if char2 in sonorne_i_boczne and char3 in samogł:
+                            if char2 != "-":
+                                newword = newword + char + "-"
+                                hyphencounter -= 1
+                                overcounter = False
+                            else:
+                                newword = newword + char
+                                hyphencounter -= 1
+                                overcounter = False
+                        elif char2 == char3 or char2 in sonorne_i_boczne or char3 in sonorne_i_boczne:
+                            if char2 in samogł:
+                                if char2 != "-":
+                                    newword = newword + char + "-"
+                                    hyphencounter -= 1
+                                    overcounter = False
+                                else:
+                                    newword = newword + char
+                                    hyphencounter -= 1
+                                    overcounter = False
+                            else:
+                                newword = newword + char
                                 overcounter = True
                         else:
-                            newword = newword + char + "-"
-                            hyphencounter -= 1
-                            overcounter = False
+                            if char2 != "-":
+                                newword = newword + char + "-"
+                                hyphencounter -= 1
+                                overcounter = False
+                            else:
+                                newword = newword + char
+                                hyphencounter -= 1
+                                overcounter = False
                     elif char in samogł and hyphencounter == 0:
                         newword = newword + char
                 newlist.append(newword)

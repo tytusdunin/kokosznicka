@@ -15,7 +15,7 @@ czówna; jej wynalazek epokę stanowi
 ## 💡 Introduction
 **Kokosznicka** (kkszn) was created to be a fast compromise between accuracy and complexity. While not as accurate and sophisticated as the (currently unpublished) algorithm by Daniel Śledziński [[LINK]](https://journals.indexcopernicus.com/api/file/viewByFileId/113053), kokosznicka seeks to improve upon the widely used Polish hyphenation dictionary for the Knuth algorithm (created by Hanna Kołodziejska and improved upon by Bogusław Jackowski and Marek Ryćko) in that it **prioritizes accuracy in determining the correct number of syllables in each word**.
 
-Any commits and suggestions for improvement are welcome! The ultimate goal is to create a fast and fairly simple algorithm which effectively hyphenates polish text according to the formalized rules and produces a human-like hyphenation.
+Any commits and suggestions for improvement are welcome! The ultimate goal is to create a fast and fairly simple algorithm which effectively hyphenates Polish text according to the formalized rules and produces a human-like output.
 
 
 ## 🔧 Usage
@@ -30,7 +30,7 @@ str = "Genezyp Kapen nie znosił niewoli w żadnej formie — od najwcześniejsz
 
 print(Kokosznicka.hyphenate(str))
 ```
-- OUTPUT: `Ge-ne-zyp Ka-pen nie zno-sił nie-wo-li w żad-nej for-mie — od naj-wcze-śniej-sze-go dzie-ciń-stwa o-ka-zy-wał wstręt do niej nie-prze-zwy-cię-żo-ny.`
+- OUTPUT: `Ge-ne-zyp Ka-pen nie zno-sił nie-wo-li w żad-nej for-mie — od naj-wcześ-niej-sze-go dzie-ciń-stwa o-ka-zy-wał wstręt do niej nie-prze-zwy-cię-żo-ny`
 
 ### syllablecount()
 This method returns an int object for the number of syllables in a given string.
@@ -43,7 +43,7 @@ print(Kokosznicka.syllablecount(str))
 - OUTPUT: `33`
 
 ### normalize()
-This method normalizes polish text into a semi-phonetic stript, effectively eliminating digraphs and disambiguiating the phonetic interpretation.
+This method normalizes Polish text into a semi-phonetic stript, effectively eliminating digraphs and disambiguiating the phonetic interpretation.
 
 ```python
 str = "Mroczne fortece pradawnych Tatr, na których wygrzewa się Król Wężów… wielkie jego cielsko siedem i pół razy owija górę olbrzymkę"
@@ -59,11 +59,12 @@ print(Kokosznicka.normalize(str))
 
 ✅ Hyphenation with a correct # of syllables
 
+⚠ Handling punctuation inside words (biało-czerwony, przyszłaś/eś etc.)
+- The program doesn't duplicate hyphens anymore
+
 ❌ Handling exceptions in semivowel formation (nauka, poliester etc.)
 
 ❌ Handling affixes in any context (pod-, nad- etc.)
-
-❌ Handling punctuation inside words (biało-czerwony, przyszłaś/eś etc.)
 
 ❌ Creating a PIP package
 
