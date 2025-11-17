@@ -30,7 +30,7 @@ str = "Genezyp Kapen nie znosił niewoli w żadnej formie — od najwcześniejsz
 
 print(Kokosznicka.hyphenate(str))
 ```
-- OUTPUT: `Ge-ne-zyp Ka-pen nie zno-sił nie-wo-li w żad-nej for-mie — od naj-wcześ-niej-sze-go dzie-ciń-stwa o-ka-zy-wał wstręt do niej nie-prze-zwy-cię-żo-ny`
+- OUTPUT: `Ge-ne-zyp Ka-pen nie zno-sił nie-wo-li w żad-nej for-mie — od naj-wcześ-niej-sze-go dzie-ciń-stwa o-ka-zy-wał wstręt do niej nie-prze-zwy-cię-żo-ny.`
 
 ### syllablecount()
 This method returns an int object for the number of syllables in a given string.
