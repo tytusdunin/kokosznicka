@@ -173,3 +173,5 @@ class Kokosznicka:
         return finalresult
         
 kkszn = Kokosznicka
+
+__all__ = ["Kokosznicka"]
