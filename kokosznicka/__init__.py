@@ -1,0 +1,1 @@
+from kokosznicka.kokosznicka import Kokosznicka
