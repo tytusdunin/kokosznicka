@@ -25,7 +25,7 @@ You can install the `kokosznicka` package from ty PyPI package repository:
 pip install kokosznicka
 ```
 
-To use the package in your project, include this line beforehand in yout Python project:
+To use the package in your project, include this line beforehand in your Python project:
 
 ```python
 from kokosznicka import Kokosznicka
