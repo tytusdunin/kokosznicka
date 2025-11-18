@@ -17,6 +17,21 @@ czówna; jej wynalazek epokę stanowi
 
 Any commits and suggestions for improvement are welcome! The ultimate goal is to create a fast and fairly simple algorithm which effectively hyphenates Polish text according to the formalized rules and produces a human-like output.
 
+## ⏬ Installation
+
+You can install the `kokosznicka` package from ty PyPI package repository:
+
+```
+pip install kokosznicka
+```
+
+To use the package in your project, include this line beforehand in yout Python project:
+
+```python
+from kokosznicka import Kokosznicka
+```
+
+Now you're all set!
 
 ## 🔧 Usage
 
@@ -61,8 +76,7 @@ print(Kokosznicka.normalize(str))
 
 ✅ Handling hyphenation inside words (biało-czerwony, niby-książka etc.)
 
-⚠  Creating a PIP package
-- Fixes necessary for it to import properly
+✅ Creating a PIP package
 
 ❌ Handling exceptions in semivowel formation (nauka, poliester etc.)
 
