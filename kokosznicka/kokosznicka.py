@@ -1,5 +1,83 @@
 import re
 
+def popr_kapitalizacja(input, replace):
+    """
+    Ta funkcja decyduje o tym, w jakiej kapitalizacji podmiany dokonać w regexie. Przyjmuje obiekty "input" oraz "output" typu string.
+    """
+    if input.isupper():
+        return replace.upper()
+    elif input.istitle():
+        return replace.capitalize()
+    else:
+        return replace.lower()
+
+wyjątki = {
+    # przyrostki bezproblemowe
+    ' cyber': ' cyber-',
+    'cyber ': 'cyber ',
+    ' hiper': ' hiper-',
+    'hiper ': 'hiper ',
+    ' super': ' super-',
+    'super ': 'super ',
+    ' nie': ' nie-',
+    'nie ': 'nie ',
+    ' bez': ' bez-',
+    'bez ': 'bez ',
+    ' śród': ' śród-',
+    ' naj': 'naj-',
+
+    #ch
+    'tysiąchektarow': 'tysiąc-hektarow',
+    #cz
+    ' specz': ' spec-z',
+    ' tysiączł': ' tysiąc-zł',
+    # ' tysiączn': ' tysiąc-zn', (tysiączłotowy, ale tysiączny)
+    #dz, dź i dż
+    ' nad': ' nad-',
+    'nad ': 'nad ',
+    ' nadzia': ' na-dzia',
+    ' nadziel': ' na-dziel',
+    ' nadziej': ' na-dziej',
+    ' nadzier': ' na-dzier',
+    ' nadziew': ' na-dziew',
+    ' nadziw': ' na-dziw',
+
+    ' odźwie': ' odź-wie',
+    ' odzie': ' o-dzie',
+    ' od': ' od-',
+    'od ': 'od ',
+
+    ' pod': ' pod-',
+    'pod ': 'pod ',
+    ' podziw': ' po-dziw',
+    ' podzio': ' po-dzio',
+    ' podzió': ' po-dzió',
+    ' podziel': ' po-dziel',
+    ' podziw': ' po-dziw',
+    ' podzwo': 'po-dzwo', 
+    ' podzwa': ' po-dzwa',
+
+    ' ponad': ' ponad-',
+    'ponad ': 'ponad ',
+    ' przedzwo': ' prze-dzwo',
+    ' nadzwo': ' na-dzwo',
+    ' budże': " bud-że",
+    'przedziw': "prze-dziw",
+    ' pozau': ' poza-u',
+    
+    #sz
+    ' eks': ' eks-',
+    'eks ': 'eks ',
+
+    'nauk': 'na-uk',
+    'naucz': 'na-ucz',
+    'marzną': 'mar-zną',
+    'marznie': 'mar-znie',
+    'marzli': 'mar-zli',
+    'marzły': 'mar-zły'
+
+}
+
 podmianki = {
     # Dwu- i trójznaki
     'rz': 'ž',
@@ -49,10 +127,38 @@ class Kokosznicka:
         """
         Metoda normalize() przyjmuje obiekt typu string i normalizuje pisownie wieloznakową. Zwraca obiekt typu string z dezabiguowaną pisownią pół-fonetyczną.
         """
-        pattern = re.compile("|".join(sorted(podmianki, key=len, reverse=True)))
-        result = pattern.sub(lambda m: podmianki[m.group(0)], string)
-        result = pattern.sub(lambda m: podmianki[m.group(0)], result)
-        return result
+        lookup_wyj = {k.lower(): v for k, v in wyjątki.items()}
+
+        pattern = re.compile(
+            "|".join(map(re.escape, sorted(lookup_wyj.keys(), key=len, reverse=True))), 
+            re.IGNORECASE
+        )
+
+        result = pattern.sub(
+            lambda m: popr_kapitalizacja(m.group(0), lookup_wyj[m.group(0).lower()]), 
+            string
+        )
+
+        # DAJEMY PODMIANKI
+        lookup_map = {k.lower(): v for k, v in podmianki.items()}
+
+        pattern = re.compile(
+            "|".join(map(re.escape, sorted(lookup_map.keys(), key=len, reverse=True))), 
+            re.IGNORECASE
+        )
+
+        result2 = pattern.sub(
+            lambda m: popr_kapitalizacja(m.group(0), lookup_map[m.group(0).lower()]), 
+            result
+        )
+        result3 = pattern.sub(
+            lambda m: popr_kapitalizacja(m.group(0), lookup_map[m.group(0).lower()]), 
+            result2
+        )
+
+        # USUWAMY "- "
+        result4 = result3.replace("- ", " ")
+        return result4
     
     def syllablecount(string):
         """
@@ -103,11 +209,17 @@ class Kokosznicka:
                     try:
                         char3 = word[i+2]
                     except:
-                        char2 = "0"
+                        char3 = "0"
+
+                    # Tworzymy zmienną "char4" do patrzenia o jedną literę w przyszłość
+                    try:
+                        char4 = word[i+3]
+                    except:
+                        char4 = "0"
 
                     if char not in samogł:
                         if overcounter == True:
-                            if char2 != "-":
+                            if char2 != "-" and char3 != "-" and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -119,7 +231,7 @@ class Kokosznicka:
                             newword = newword + char
                     elif char in samogł and hyphencounter != 0:
                         if char2 in sonorne_i_boczne and char3 in samogł:
-                            if char2 != "-":
+                            if char2 != "-" and char3 != "-" and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -129,7 +241,7 @@ class Kokosznicka:
                                 overcounter = False
                         elif char2 == char3 or char2 in sonorne_i_boczne or char3 in sonorne_i_boczne:
                             if char2 in samogł:
-                                if char2 != "-":
+                                if char2 != "-" and char3 != "-" and char4 != "-":
                                     newword = newword + char + "-"
                                     hyphencounter -= 1
                                     overcounter = False
@@ -141,7 +253,7 @@ class Kokosznicka:
                                 newword = newword + char
                                 overcounter = True
                         else:
-                            if char2 != "-":
+                            if char2 != "-" and char3 != "-" and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -155,21 +267,27 @@ class Kokosznicka:
         wynik = " ".join(newlist)
             
         # Odwracamy słownik
-        odwrotne_podmianki = {v: k for k, v in podmianki.items()}
-
-        # Pobieramy klucze odwrotnego słownika
-        odwrotne_klucze = list(odwrotne_podmianki.keys())
-
-        # Sortowanie kluczy wg długości malejąco
-        odwrotne_klucze_posortowane = sorted(odwrotne_klucze, key=len, reverse=True)
+        odwrotne_podmianki = {v.lower(): k for k, v in podmianki.items()}
 
         # Pattern z posortowanych i "escapowanych" kluczy
-        pattern_odwrotny = re.compile("|".join(re.escape(k) for k in odwrotne_klucze_posortowane))
+        pattern_odwrotny = re.compile(
+            "|".join(map(re.escape, sorted(odwrotne_podmianki.keys(), key=len, reverse=True))), 
+            re.IGNORECASE
+        )
 
         # Wracamy do oryginału
         # Podwójnie, aby mniejsze fragmenty tez wróciły do oryginalnej postaci
-        oryginalny_tekst = pattern_odwrotny.sub(lambda m: odwrotne_podmianki[m.group(0)], wynik)
-        finalresult = pattern_odwrotny.sub(lambda m: odwrotne_podmianki[m.group(0)], oryginalny_tekst)
+
+        finalowy = pattern_odwrotny.sub(
+            lambda m: popr_kapitalizacja(m.group(0), odwrotne_podmianki[m.group(0).lower()]), 
+            wynik
+        )
+        finalresult = pattern_odwrotny.sub(
+            lambda m: popr_kapitalizacja(m.group(0), odwrotne_podmianki[m.group(0).lower()]), 
+            finalowy
+        )
         return finalresult
         
 kkszn = Kokosznicka
+
+print(Kokosznicka.hyphenate("NAUKA I NAUCZYCIELE SĄ NAJWAŻNIESI"))
