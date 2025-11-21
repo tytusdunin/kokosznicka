@@ -58,7 +58,7 @@ print(Kokosznicka.syllablecount(str))
 - OUTPUT: `33`
 
 ### normalize()
-This method normalizes Polish text into a semi-phonetic stript, effectively eliminating digraphs and disambiguiating the phonetic interpretation.
+This method normalizes Polish text into a semi-phonetic stript, effectively eliminating digraphs and disambiguiating the phonetic interpretation. Warning – hyphens may appear here for exception handling purposes.
 
 ```python
 str = "Mroczne fortece pradawnych Tatr, na których wygrzewa się Król Wężów… wielkie jego cielsko siedem i pół razy owija górę olbrzymkę"
@@ -68,7 +68,7 @@ print(Kokosznicka.normalize(str))
 - OUTPUT: `Mročne fortece pradawnyĥ Tatr, na któryĥ wygžewa ŝĵę Król Wężów… wĵelk̂ĵe jego ĉĵelsko ŝĵedem i pół razy owija górę olbžymkę`
 
 ## 🧭 Roadmap
-✅ Determining then # of syllables in a word
+✅ Determining the # of syllables in a word
 
 ✅ Phonetic disambiguation with a semi-phonetic script
 
