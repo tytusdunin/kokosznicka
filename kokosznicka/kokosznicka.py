@@ -24,7 +24,12 @@ wyjątki = {
     ' bez': ' bez-',
     'bez ': 'bez ',
     ' śród': ' śród-',
-    ' naj': 'naj-',
+    ' naj': ' naj-',
+    ' poli': ' poli-',
+    ' mili': ' mili-',
+    ' pra': ' pra-', #praugrofiński
+    ' nau': ' na-u', #naurodzić, naubliżać
+    ' prze': ' prze-',
 
     #ch
     'tysiąchektarow': 'tysiąc-hektarow',
@@ -63,7 +68,7 @@ wyjątki = {
     ' nadzwo': ' na-dzwo',
     ' budże': " bud-że",
     'przedziw': "prze-dziw",
-    ' pozau': ' poza-u',
+    'pozau': 'poza-u',
     
     #sz
     ' eks': ' eks-',
@@ -74,7 +79,12 @@ wyjątki = {
     'marzną': 'mar-zną',
     'marznie': 'mar-znie',
     'marzli': 'mar-zli',
-    'marzły': 'mar-zły'
+    'marzły': 'mar-zły',
+    'tarzan': 'tar-zan',
+    'laurk': 'la-urk',
+    'eus ': 'e-us ',
+    'eusz': 'e-usz', #ALE jubileuszowy, więc bez spacji
+    'eum ': 'e-um '
 
 }
 
@@ -115,10 +125,6 @@ podmianki = {
 samogł = "aeiouyóęąAEIOUYÓĘĄ"
 sonorne_i_boczne = "nmlrłńjň"
 
-# Na ten moment nieużywane
-półsamogłoskowe_wyjątki = {'ieu', 'eus', 'eum', 'pozau', 'prau', 'nauk', ' nau', 'eus '}
-dwuznakowe_wyjątki = {'Tarzan', 'marznąć'}
-
 class Kokosznicka:
     def __init__(self, version):
         self.version = "v1.0"
@@ -127,6 +133,7 @@ class Kokosznicka:
         """
         Metoda normalize() przyjmuje obiekt typu string i normalizuje pisownie wieloznakową. Zwraca obiekt typu string z dezabiguowaną pisownią pół-fonetyczną.
         """
+        # dajemy wyjątki
         lookup_wyj = {k.lower(): v for k, v in wyjątki.items()}
 
         pattern = re.compile(
@@ -219,7 +226,7 @@ class Kokosznicka:
 
                     if char not in samogł:
                         if overcounter == True:
-                            if char2 != "-" and char3 != "-" and char4 != "-":
+                            if char2 != "-" and char3 != "-": #and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -231,7 +238,7 @@ class Kokosznicka:
                             newword = newword + char
                     elif char in samogł and hyphencounter != 0:
                         if char2 in sonorne_i_boczne and char3 in samogł:
-                            if char2 != "-" and char3 != "-" and char4 != "-":
+                            if char2 != "-" and char3 != "-": #and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -241,7 +248,7 @@ class Kokosznicka:
                                 overcounter = False
                         elif char2 == char3 or char2 in sonorne_i_boczne or char3 in sonorne_i_boczne:
                             if char2 in samogł:
-                                if char2 != "-" and char3 != "-" and char4 != "-":
+                                if char2 != "-" and char3 != "-": #and char4 != "-":
                                     newword = newword + char + "-"
                                     hyphencounter -= 1
                                     overcounter = False
@@ -253,7 +260,7 @@ class Kokosznicka:
                                 newword = newword + char
                                 overcounter = True
                         else:
-                            if char2 != "-" and char3 != "-" and char4 != "-":
+                            if char2 != "-" and char3 != "-": #and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -289,5 +296,3 @@ class Kokosznicka:
         return finalresult
         
 kkszn = Kokosznicka
-
-print(Kokosznicka.hyphenate("NAUKA I NAUCZYCIELE SĄ NAJWAŻNIESI"))

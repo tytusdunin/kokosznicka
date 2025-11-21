@@ -78,11 +78,11 @@ print(Kokosznicka.normalize(str))
 
 ✅ Creating a PIP package
 
-❌ Handling exceptions in semivowel formation (nauka, poliester etc.)
+✅ Handling exceptions in semivowel formation (nauka, poliester etc.)
 
-❌ Handling exceptions in digraph normalization (marznąć, Tarzan etc.)
+✅ Handling exceptions in digraph normalization (marznąć, Tarzan etc.)
 
-❌ Handling affixes in any context (pod-, nad- etc.)
+✅ Handling affixes in any context (pod-, nad- etc.)
 
 ❌ Creating an acronym decoding engine (PWN, PKiN, SJPDor etc.)
 
