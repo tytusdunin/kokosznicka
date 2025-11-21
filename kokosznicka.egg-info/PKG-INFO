@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: kokosznicka
-Version: 0.1.5
+Version: 0.2
 Summary: A simple and effective syllabificator for the Polish language.
 Home-page: https://github.com/tytusdunin/kokosznicka
-Download-URL: https://github.com/tytusdunin/kokosznicka/archive/refs/tags/v.0.1.5.tar.gz
+Download-URL: https://github.com/tytusdunin/kokosznicka/archive/refs/tags/v.0.2.tar.gz
 Author: Tytus Dunin
 Author-email: tm.dunin@student.uw.edu.pl
 License: GPL-3.0
