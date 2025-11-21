@@ -84,6 +84,8 @@ print(Kokosznicka.normalize(str))
 
 ✅ Handling affixes in any context (pod-, nad- etc.)
 
+❌ Disambiguating punctiuation for exception handling 
+
 ❌ Creating an acronym decoding engine (PWN, PKiN, SJPDor etc.)
 
 ... and many more!
