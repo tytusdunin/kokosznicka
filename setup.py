@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'kokosznicka',
   packages = ['kokosznicka'],
-  version = '0.1.5',
+  version = '0.2',
   license='GPL-3.0',
   description = 'A simple and effective syllabificator for the Polish language.',
   author = 'Tytus Dunin',
