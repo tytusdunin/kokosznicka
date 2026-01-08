@@ -105,6 +105,7 @@ podmianki = {
     'ią': 'ĵą',
     'eu': 'eĺ',
     'au': 'aĺ',
+    'ii': 'iɨ', # Dla grup typu "filharmonii, Danii"
     # Samogłoski + "dzi"
     'dzio': 'ʒ́o',
     'dzia': 'ʒ́a',
