@@ -13,78 +13,78 @@ def popr_kapitalizacja(input, replace):
 
 wyjątki = {
     # przyrostki bezproblemowe
-    ' cyber': ' cyber-',
+    ' cyber': ' cyber|',
     'cyber ': 'cyber ',
-    ' hiper': ' hiper-',
+    ' hiper': ' hiper|',
     'hiper ': 'hiper ',
-    ' super': ' super-',
+    ' super': ' super|',
     'super ': 'super ',
-    ' nie': ' nie-',
+    ' nie': ' nie|',
     'nie ': 'nie ',
-    ' bez': ' bez-',
+    ' bez': ' bez|',
     'bez ': 'bez ',
-    ' śród': ' śród-',
-    ' naj': ' naj-',
-    ' poli': ' poli-',
-    ' mili': ' mili-',
-    ' pra': ' pra-', #praugrofiński
-    ' nau': ' na-u', #naurodzić, naubliżać
-    ' prze': ' prze-',
+    ' śród': ' śród|',
+    ' naj': ' naj|',
+    ' poli': ' poli|',
+    ' mili': ' mili|',
+    ' pra': ' pra|', #praugrofiński
+    ' nau': ' na|u', #naurodzić, naubliżać
+    ' prze': ' prze|',
 
     #ch
-    'tysiąchektarow': 'tysiąc-hektarow',
+    'tysiąchektarow': 'tysiąc|hektarow',
     #cz
-    ' specz': ' spec-z',
-    ' tysiączł': ' tysiąc-zł',
-    # ' tysiączn': ' tysiąc-zn', (tysiączłotowy, ale tysiączny)
+    ' specz': ' spec|z',
+    ' tysiączł': ' tysiąc|zł',
+    # ' tysiączn': ' tysiąc|zn', (tysiączłotowy, ale tysiączny)
     #dz, dź i dż
-    ' nad': ' nad-',
+    ' nad': ' nad|',
     'nad ': 'nad ',
-    ' nadzia': ' na-dzia',
-    ' nadziel': ' na-dziel',
-    ' nadziej': ' na-dziej',
-    ' nadzier': ' na-dzier',
-    ' nadziew': ' na-dziew',
-    ' nadziw': ' na-dziw',
+    ' nadzia': ' na|dzia',
+    ' nadziel': ' na|dziel',
+    ' nadziej': ' na|dziej',
+    ' nadzier': ' na|dzier',
+    ' nadziew': ' na|dziew',
+    ' nadziw': ' na|dziw',
 
-    ' odźwie': ' odź-wie',
-    ' odzie': ' o-dzie',
-    ' od': ' od-',
+    ' odźwie': ' odź|wie',
+    ' odzie': ' o|dzie',
+    ' od': ' od|',
     'od ': 'od ',
 
-    ' pod': ' pod-',
+    ' pod': ' pod|',
     'pod ': 'pod ',
-    ' podziw': ' po-dziw',
-    ' podzio': ' po-dzio',
-    ' podzió': ' po-dzió',
-    ' podziel': ' po-dziel',
-    ' podziw': ' po-dziw',
-    ' podzwo': 'po-dzwo', 
-    ' podzwa': ' po-dzwa',
+    ' podziw': ' po|dziw',
+    ' podzio': ' po|dzio',
+    ' podzió': ' po|dzió',
+    ' podziel': ' po|dziel',
+    ' podziw': ' po|dziw',
+    ' podzwo': 'po|dzwo', 
+    ' podzwa': ' po|dzwa',
 
-    ' ponad': ' ponad-',
+    ' ponad': ' ponad|',
     'ponad ': 'ponad ',
-    ' przedzwo': ' prze-dzwo',
-    ' nadzwo': ' na-dzwo',
-    ' budże': " bud-że",
-    'przedziw': "prze-dziw",
-    'pozau': 'poza-u',
+    ' przedzwo': ' prze|dzwo',
+    ' nadzwo': ' na|dzwo',
+    ' budże': " bud|że",
+    'przedziw': "prze|dziw",
+    'pozau': 'poza|u',
     
     #sz
-    ' eks': ' eks-',
+    ' eks': ' eks|',
     'eks ': 'eks ',
 
-    'nauk': 'na-uk',
-    'naucz': 'na-ucz',
-    'marzną': 'mar-zną',
-    'marznie': 'mar-znie',
-    'marzli': 'mar-zli',
-    'marzły': 'mar-zły',
-    'tarzan': 'tar-zan',
-    'laurk': 'la-urk',
-    'eus ': 'e-us ',
-    'eusz': 'e-usz', #ALE jubileuszowy, więc bez spacji
-    'eum ': 'e-um '
+    'nauk': 'na|uk',
+    'naucz': 'na|ucz',
+    'marzną': 'mar|zną',
+    'marznie': 'mar|znie',
+    'marzli': 'mar|zli',
+    'marzły': 'mar|zły',
+    'tarzan': 'tar|zan',
+    'laurk': 'la|urk',
+    'eus ': 'e|us ',
+    'eusz': 'e|usz', #ALE jubileuszowy, więc bez spacji
+    'eum ': 'e|um '
 
 }
 
@@ -120,11 +120,13 @@ podmianki = {
     'ci': 'ĉi',
     'ki': 'k̂i',
     'gi': 'ĝi',
-    'ni': 'ňi'
+    'ni': 'ňi',
+    'nie': 'ňĵe',
 }
 
 samogł = "aeiouyóęąAEIOUYÓĘĄ"
 sonorne_i_boczne = "nmlrłńjň"
+mik = "-|"
 
 class Kokosznicka:
     def __init__(self, version):
@@ -227,7 +229,7 @@ class Kokosznicka:
 
                     if char not in samogł:
                         if overcounter == True:
-                            if char2 != "-" and char3 != "-": #and char4 != "-":
+                            if char2 not in mik and char3 not in mik: #and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -239,7 +241,7 @@ class Kokosznicka:
                             newword = newword + char
                     elif char in samogł and hyphencounter != 0:
                         if char2 in sonorne_i_boczne and char3 in samogł:
-                            if char2 != "-" and char3 != "-": #and char4 != "-":
+                            if char2 not in mik and char3 not in mik: #and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -249,7 +251,7 @@ class Kokosznicka:
                                 overcounter = False
                         elif char2 == char3 or char2 in sonorne_i_boczne or char3 in sonorne_i_boczne:
                             if char2 in samogł:
-                                if char2 != "-" and char3 != "-": #and char4 != "-":
+                                if char2 not in mik and char3 not in mik: #and char4 != "-":
                                     newword = newword + char + "-"
                                     hyphencounter -= 1
                                     overcounter = False
@@ -261,7 +263,7 @@ class Kokosznicka:
                                 newword = newword + char
                                 overcounter = True
                         else:
-                            if char2 != "-" and char3 != "-": #and char4 != "-":
+                            if char2 not in mik and char3 not in mik: #and char4 != "-":
                                 newword = newword + char + "-"
                                 hyphencounter -= 1
                                 overcounter = False
@@ -272,6 +274,19 @@ class Kokosznicka:
                     elif char in samogł and hyphencounter == 0:
                         newword = newword + char
                 newlist.append(newword)
+
+        # pozbywamy się protetycznych "|"
+        for i, word in enumerate(newlist):
+            count = Kokosznicka.syllablecount(word)
+            hypcount = word.count("-")
+            if count <= 1:
+                newlist[i] = word.replace("|", "")
+            if count >= 2:
+                if (hypcount + 1) < count:
+                    newlist[i] = word.replace("|", "-")
+                elif (hypcount + 1) == count:
+                    newlist[i] = word.replace("|", "")
+
         wynik = " ".join(newlist)
             
         # Odwracamy słownik
