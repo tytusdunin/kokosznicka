@@ -103,6 +103,7 @@ podmianki = {
     'ie': 'ĵe',
     'ię': 'ĵę',
     'ią': 'ĵą',
+    'iu': 'ĵu',
     'eu': 'eĺ',
     'au': 'aĺ',
     'ii': 'iɨ', # Dla grup typu "filharmonii, Danii"
