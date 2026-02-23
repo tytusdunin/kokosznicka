@@ -69,6 +69,7 @@ wyjątki = {
     ' budże': " bud|że",
     'przedziw': "prze|dziw",
     'pozau': 'poza|u',
+    'zauw': 'za|uw',
     
     #sz
     ' eks': ' eks|',
