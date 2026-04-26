@@ -130,7 +130,7 @@ podmianki = {
     'nie': 'ňĵe',
 }
 
-samogł = "aeiouyóęąAEIOUYÓĘĄ"
+samogł = "aeiouyóęąáéAEIOUYÓĘĄÁÉ"
 sonorne_i_boczne = "nmlrłńjň"
 mik = "-|"
 
