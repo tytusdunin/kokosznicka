@@ -83,9 +83,12 @@ wyjątki = {
     'marzły': 'mar|zły',
     'tarzan': 'tar|zan',
     'laurk': 'la|urk',
+    'nieuś' : 'nie|uś', #nieuśmierzony
     'eus ': 'e|us ',
+    
     'eusz': 'e|usz', #ALE jubileuszowy, więc bez spacji
-    'eum ': 'e|um '
+    'eum ': 'e|um ',
+    'nie': "|nie" #TESTOWE
 
 }
 
